@@ -3,7 +3,9 @@
 > 一款强大的 B 站评论区搜索与分析 Chrome 扩展，支持关键词搜索、正则表达式、词频分析、情感分析和 AI 分析。
 
 <p align="center">
-  <img src="screenshots/demo.png" alt="功能演示" width="700">
+  <img src="screenshots/Snipaste_2026-02-14_11-43-24.png" alt="词频分析 - 柱状图模式" width="700">
+  <br>
+  <img src="screenshots/Snipaste_2026-02-14_11-48-22.png" alt="词频分析 - 词云模式" width="700">
 </p>
 
 ## ✨ 功能特性
