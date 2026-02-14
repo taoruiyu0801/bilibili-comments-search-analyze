@@ -1,0 +1,32 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if ever used)
+node_modules/
+package-lock.json
+
+# Build artifacts
+*.zip
+*.crx
+*.pem
+
+# Internal docs
+修复说明.md
+评论活跃用户统计功能规划.md
+词云优化说明.md
+词云调试指南.md
+PROJECT_STRUCTURE.md
+
+# Agent files
+.claude/
+.gemini/
+.agent/

@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Bilibili 评论搜索",
+  "description": "在B站视频评论区搜索关键词，支持高亮、筛选、正则表达式和词频分析",
+  "version": "1.1.0",
+  "permissions": [],
+  "host_permissions": [
+    "https://api.deepseek.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/video/*",
+        "https://www.bilibili.com/bangumi/*",
+        "https://www.bilibili.com/list/*"
+      ],
+      "js": [
+        "lib/echarts.min.js",
+        "lib/echarts-wordcloud.min.js",
+        "lib/jieba_rs_wasm.js",
+        "lib/jieba-loader.js",
+        "wordfreq-data.js",
+        "wordfreq-sentiment.js",
+        "wordfreq-ai.js",
+        "wordfreq-charts.js",
+        "wordfreq.js",
+        "content.js"
+      ],
+      "css": ["content.css", "wordfreq.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/jieba_rs_wasm_bg.wasm",
+        "data/stopwords.json",
+        "data/positive.json",
+        "data/negative.json",
+        "data/custom_dict.txt"
+      ],
+      "matches": [
+        "https://www.bilibili.com/*"
+      ]
+    }
+  ],
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

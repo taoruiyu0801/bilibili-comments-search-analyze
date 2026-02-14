@@ -1,0 +1,508 @@
+/* ========== 词频分析面板 ========== */
+#bcs-wordfreq-panel {
+  background: #ffffff !important;
+  border: 1px solid #d0d4d9 !important;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 控件栏 */
+#bcs-wf-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+#bcs-wf-controls label {
+  font-size: 13px;
+  color: #333 !important;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+#bcs-wf-controls input[type="number"] {
+  width: 60px;
+  height: 30px;
+  padding: 0 6px;
+  border: 1px solid #c0c4cc !important;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #1a1a1a !important;
+  background: #fff !important;
+  outline: none;
+  text-align: center;
+  font-weight: 500;
+}
+
+#bcs-wf-controls input[type="number"]:focus {
+  border-color: #00aeec !important;
+}
+
+.bcs-wf-btn {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid #c0c4cc !important;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #ffffff !important;
+  color: #333 !important;
+  transition: all 0.2s;
+  white-space: nowrap;
+  user-select: none;
+  font-weight: 500;
+}
+
+.bcs-wf-btn:hover {
+  background: #e8ecf1 !important;
+  border-color: #00aeec !important;
+}
+
+.bcs-wf-btn.active {
+  background: #00aeec !important;
+  color: #fff !important;
+  border-color: #00aeec !important;
+}
+
+.bcs-wf-btn.active:hover {
+  background: #009ddb !important;
+}
+
+#bcs-wf-status {
+  font-size: 12px;
+  color: #999 !important;
+  margin-left: auto;
+}
+
+/* 折叠/展开 */
+#bcs-wf-toggle {
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  color: #00aeec;
+  margin-left: 8px;
+}
+
+/* 图表容器 */
+#bcs-wf-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  margin-bottom: 10px;
+  background: #ffffff !important;
+  border-radius: 4px;
+}
+
+#bcs-wf-chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.3s;
+  pointer-events: auto;
+}
+
+#bcs-wf-chart.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#bcs-wf-wordcloud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+#bcs-wf-wordcloud.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 评论列表 */
+#bcs-wf-comments {
+  max-height: 300px;
+  overflow-y: auto;
+  border-top: 1px solid #e3e5e7;
+  padding-top: 10px;
+  display: none;
+}
+
+#bcs-wf-comments.show {
+  display: block;
+}
+
+#bcs-wf-comments-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a !important;
+  margin-bottom: 8px;
+}
+
+.bcs-wf-comment-item {
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  background: #ffffff;
+  border: 1px solid #d9dde1;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.bcs-wf-comment-user {
+  font-size: 12px;
+  color: #00aeec;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.bcs-wf-comment-text {
+  color: #1a1a1a !important;
+  word-break: break-all;
+}
+
+.bcs-wf-comment-text .bcs-wf-word-hl {
+  background: #fff3a8;
+  padding: 1px 2px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+/* 排除词面板 */
+#bcs-wf-exclude {
+  border-top: 1px solid #e3e5e7;
+  padding-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#bcs-wf-exclude-label {
+  font-size: 12px;
+  color: #999 !important;
+  white-space: nowrap;
+}
+
+.bcs-wf-exclude-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: #e8ecf1;
+  border: 1px solid #c0c4cc;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.bcs-wf-exclude-tag .bcs-wf-tag-remove {
+  cursor: pointer;
+  color: #999;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.bcs-wf-exclude-tag .bcs-wf-tag-remove:hover {
+  color: #ff4d4f;
+}
+
+#bcs-wf-exclude-input {
+  width: 80px;
+  height: 24px;
+  padding: 0 6px;
+  border: 1px solid #d0d0d0 !important;
+  border-radius: 4px;
+  font-size: 12px;
+  outline: none;
+  color: #333 !important;
+  background: #fff !important;
+}
+
+#bcs-wf-exclude-input:focus {
+  border-color: #00aeec !important;
+}
+
+/* 加载提示 */
+#bcs-wf-loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #999;
+  font-size: 14px;
+}
+
+#bcs-wf-loading .bcs-wf-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e3e5e7;
+  border-top-color: #00aeec;
+  border-radius: 50%;
+  animation: bcs-wf-spin 0.8s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes bcs-wf-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 暗色模式下仍强制使用白底黑字 */
+
+/* ========== AI 分析按钮 ========== */
+.bcs-ai-btn {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: #fff !important;
+  border-color: #059669 !important;
+  font-weight: 600;
+}
+
+.bcs-ai-btn:hover {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  border-color: #047857 !important;
+}
+
+.bcs-ai-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bcs-ai-settings-btn {
+  padding: 0 8px !important;
+  min-width: 30px;
+  font-size: 14px !important;
+}
+
+/* AI 分析进度 */
+#bcs-ai-progress {
+  font-size: 12px;
+  color: #10b981;
+  font-weight: 500;
+  display: none;
+  white-space: nowrap;
+}
+
+/* ========== API Key 弹窗 ========== */
+#bcs-apikey-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bcs-apikey-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.bcs-apikey-content {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 32px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.bcs-apikey-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.bcs-apikey-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.bcs-apikey-desc a {
+  color: #10b981;
+  text-decoration: none;
+}
+
+.bcs-apikey-desc a:hover {
+  text-decoration: underline;
+}
+
+.bcs-apikey-current {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+  font-family: monospace;
+}
+
+.bcs-apikey-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #d0d4d9 !important;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  color: #333 !important;
+  background: #fafafa !important;
+  box-sizing: border-box;
+  font-family: monospace;
+  margin-bottom: 16px;
+}
+
+.bcs-apikey-input:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+}
+
+.bcs-apikey-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ========== 情感总结按钮 ========== */
+.bcs-summary-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+  color: #fff !important;
+  border-color: #4f46e5 !important;
+  font-weight: 600;
+}
+
+.bcs-summary-btn:hover {
+  background: linear-gradient(135deg, #4f46e5, #4338ca) !important;
+  border-color: #4338ca !important;
+}
+
+.bcs-summary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========== 情感总结面板 ========== */
+#bcs-wf-summary-box {
+  display: none;
+  border: 1px solid #e0e3e8;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background: #fafbfc;
+}
+
+#bcs-wf-summary-box.show {
+  display: block;
+}
+
+#bcs-wf-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+.bcs-wf-summary-title-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+#bcs-wf-summary-close {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+#bcs-wf-summary-close:hover {
+  color: #fff;
+}
+
+#bcs-wf-summary-content {
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 情感分布条 */
+.bcs-wf-summary-bar-wrap {
+  margin-bottom: 10px;
+}
+
+.bcs-wf-summary-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.bcs-wf-summary-bar-pos {
+  background: #f5615c;
+  min-width: 1px;
+}
+
+.bcs-wf-summary-bar-neu {
+  background: #bfbfbf;
+  min-width: 1px;
+}
+
+.bcs-wf-summary-bar-neg {
+  background: #5b8ff9;
+  min-width: 1px;
+}
+
+.bcs-wf-summary-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #999;
+}
+
+.bcs-wf-summary-label-pos { color: #f5615c; font-weight: 500; }
+.bcs-wf-summary-label-neu { color: #999; font-weight: 500; }
+.bcs-wf-summary-label-neg { color: #5b8ff9; font-weight: 500; }
+
+/* 总结文本 */
+.bcs-wf-summary-text {
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #e8ebf0;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  color: #1a1a1a !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 元信息 */
+.bcs-wf-summary-meta {
+  font-size: 11px;
+  color: #aaa;
+  text-align: right;
+}
